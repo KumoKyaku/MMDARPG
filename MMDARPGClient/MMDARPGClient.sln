@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMDARPGClient.CSharp", "MMDARPGClient.CSharp.csproj", "{8BC03F5D-87F7-F9D2-D676-FB7EA0AD0FA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMDARPGClient.CSharp.Editor", "MMDARPGClient.CSharp.Editor.csproj", "{D2DC57FB-A1B2-0B87-6511-774268D3F091}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8BC03F5D-87F7-F9D2-D676-FB7EA0AD0FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BC03F5D-87F7-F9D2-D676-FB7EA0AD0FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BC03F5D-87F7-F9D2-D676-FB7EA0AD0FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BC03F5D-87F7-F9D2-D676-FB7EA0AD0FA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2DC57FB-A1B2-0B87-6511-774268D3F091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2DC57FB-A1B2-0B87-6511-774268D3F091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2DC57FB-A1B2-0B87-6511-774268D3F091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2DC57FB-A1B2-0B87-6511-774268D3F091}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
