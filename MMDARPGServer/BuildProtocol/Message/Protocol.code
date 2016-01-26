@@ -1,0 +1,2015 @@
+package Protocol;
+module message ZC 0x10000000;
+
+// ================================================================
+// ================================================ Item Object
+// ================================================================
+message PKS_ZC_PROPERTY 0x10000001
+{
+	required string key = 1;
+	required int32 value = 2;		
+}
+
+message PKS_ZC_CARD 0x10000002
+{
+	required int32 uid = 1;	
+	required int32 type_id = 2;	
+	required int32 level = 3;	
+	required int32 equip_index = 4;
+	required uint32 exp = 5;
+
+	repeated PKS_ZC_PROPERTY unique_properties = 6;
+}
+
+message PKS_ZC_ITEM 0x10000005
+{	
+	required int32 uid = 1;
+	required int32 type_id = 2;
+	required int32 owner_uid = 3;
+	required int32 equip_index = 4;
+	required int32 pileNum = 6;
+	repeated bool isopen = 5;
+}
+
+message PKS_ZC_ITEM_UPDATE 0x10000009
+{	
+	repeated PKS_ZC_ITEM items_list = 1;
+}
+
+message PKS_ZC_ITEM_PROPERTY 0x10000003
+{
+	required string key = 1;
+	required string value = 2;		
+}
+
+message PKS_ZC_VEC2 0x10000004
+{
+	required float x = 1;
+	required float y = 2;
+}
+
+message PKS_ZC_ITEM_REINFORCE 0x10000006
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL = 1;
+	}
+	required RESULT result = 1;
+	required int32 item_uid = 2;
+	required int32 slot_id = 3;
+	required int32 slot_state = 4;
+
+//	repeated int32 slot_reinforceStat = 2;
+//	repeated PKS_ZC_ITEM used_item = 3;
+//	repeated int32 used_item_count = 4;
+
+}
+
+message PKS_ZC_ITEM_CALLREINFORCE 0x10000007
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL = 1;
+	}
+	required int32 newItem_uid = 1;
+	required int32 newItem_type =2;
+	required RESULT result = 3;
+}
+
+message PKS_ZC_ITEM_COMBIN 0x10000008
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL = 1;
+		CHECKSUCCESS = 2;
+		CHECKFAIL = 3;
+	}
+	required PKS_ZC_ITEM item = 1;
+	required RESULT result = 2;
+}
+// ================================================================
+// ================================================ World Sync
+// ================================================================
+message PKS_ZC_ENTER_WORLD 0x10000010
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_NO_CHARACTER = 1;
+		FAIL_NO_ZONE = 2;
+	}
+
+	required int32 character_uid = 1;
+	repeated PKS_ZC_QUEST quest_list = 2;
+	repeated PKS_ZC_ITEM items_list = 3;
+	repeated PKS_ZC_SKILLCD_EW skill_list = 4;
+	repeated PKS_ZC_SKILLLV_EW skill_level = 5;
+	repeated PKS_ZC_PET_INFO pet_list =6;
+	required RESULT result = 7;
+}
+
+message PKS_ZC_LEAVE_WORLD 0x10000011
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+	}
+
+	required RESULT result = 1;
+}
+
+message PKS_ZC_SKILLCD_EW 0x10000012
+{
+	required int32 skill_list = 1;
+	required int32 skill_cd = 2;
+}
+message PKS_ZC_SKILLLV_EW 0x10000013
+{
+	required int32 skill_level = 1;
+}
+
+message PKS_CC_CHANGEJOB 0x10000015
+{
+	enum ResultType
+	{
+		Success = 0;
+		SystemError = 1;
+		JobError = 2;
+		SexError = 3;
+	}
+	required string job = 1;
+	required int32 sex = 2;
+	required ResultType result = 3;
+}
+
+message PKS_ZC_CHARACTER_INFO 0x10000020
+{
+	required int32 uid = 1;
+	required int32 id = 2;
+	required string name = 3;
+	required string jobID = 4;
+	required int32 level = 5;
+	required uint32 exp = 6;	
+	required int32 zoneID = 7;
+	required int32 channel = 8;
+	required float posX = 9;
+	required float posY = 10;
+	required int32 angle = 11;
+	required int32 pose_id = 13;
+	required int32 dummyHead = 14;
+	required int32 hairColor = 15;
+	required int32 dummyEye = 16;
+	required int32 dummyHeadTop = 17;
+	required int32 dummyHeadMiddle = 18;
+	required int32 dummyHeadBottom = 19;
+	required int32 dummyBLWeapon = 20;
+	required int32 dummyBRWeapon = 21;
+	required int32 dummyMount = 22;  
+	 
+	required int32 dummyRoot = 23;
+	repeated int32 petTypeId = 24;
+
+}
+
+message PKS_ZC_MONSTER_INFO 0x10000021
+{
+	required int32 instance_id = 1;
+	required int32 id = 8;
+	required string monsterName = 2;
+	required int32 hp = 3;
+	required int32 hp_max = 4;
+	required PKS_ZC_VEC2 pos = 6;
+	repeated PKS_ZC_BUFF buff_list = 7;
+	required int32 angle = 5;
+}
+
+message PKS_ZC_NPC_INFO 0x10000022
+{
+	enum TYPE_QUEST
+	{
+		NONE = 0;
+		AVAIABLE = 1;
+		PRGORESS = 2;
+		COMPLETE = 3;
+	}
+
+	required int32 instance_id = 1;
+	required string npcName = 2;
+	required float x = 3;
+	required float y = 4;
+	required int32 angle = 5;
+
+	required TYPE_QUEST quest_type = 6;
+}
+
+message PKS_ZC_DERIVE_INFO 0x10000023
+{
+	required int32 instance_id = 1;
+	required string deriveName = 2;
+	required int32 hp = 3;
+	required int32 hp_max = 4;
+	required PKS_ZC_VEC2 pos = 5;	
+	repeated PKS_ZC_BUFF buff_list = 7;
+	required double life = 8;
+	required int32 owner_instance_id = 9;
+	required double elapsed_life = 10;
+	required int32 level = 11;
+}
+
+message PKS_ZC_PET_INFO 0x10000024
+{
+	required int32 instance_id = 1;
+	required int32 pet_uid = 2;
+	required int32 type_id = 3;
+	required int32 hp = 4;
+	required int32 hp_max = 5;
+	required int32 level = 6;
+	required PKS_ZC_VEC2 pos = 7;	
+	
+	repeated PKS_ZC_BUFF buff_list = 8;
+	required int32 owner_instance_id = 9;
+
+	required int32 isExist = 10;
+	required int32 isEquip = 11;
+}
+
+message PKS_ZC_MONSTER_REMOVE 0x10000025
+{
+	required int32 instance_id = 1;
+}
+
+message PKS_ZC_DERIVE_REMOVE 0x10000026
+{
+	required int32 instance_id = 1;
+}
+
+message PKS_ZC_PET_REMOVE 0x10000027
+{
+	required int32 instance_id = 1;
+	required int32 owner_instance_id = 2;
+}
+
+message PKS_ZC_APC_REMOVE 0x10000028
+{
+	required int32 instance_id = 1;
+}
+
+message PKS_ZC_APC_INFO 0x10000029
+{
+	required int32 instance_id = 1; 
+	required PKS_ZC_CHARACTER_INFO info = 2;
+	required int32 hp = 3;
+	required int32 hp_max = 4;
+	required int32 level = 5;
+	required PKS_ZC_VEC2 pos = 6;	
+	
+	repeated PKS_ZC_BUFF buff_list = 7;
+	required int32 owner_instance_id = 8; 
+}
+
+message PKS_ZC_CHARACTER_STAT 0x10000030
+{	
+	required int32 instance_id = 1;		
+	repeated PKS_ZC_PROPERTY property_list = 2;
+}
+
+message PKS_ZC_CHARACTER_ENTER 0x10000040
+{
+	required PKS_ZC_CHARACTER_INFO info = 1;
+	required PKS_ZC_CHARACTER_STAT stat = 2;
+	required PKS_ZC_NATURELIST nature = 3;
+	required PKS_ZC_Currencies currencies = 4;
+}
+
+message PKS_ZC_CHARACTER_LEAVE 0x10000041
+{
+	repeated int32 instance_id_list = 1;
+}
+
+message PKS_ZC_CHARACTER_CHANGEJOB 0x10000042
+{
+	required PKS_ZC_CHARACTER_INFO info = 1;
+	required PKS_ZC_CHARACTER_STAT stat = 2;
+	required PKS_ZC_NATURELIST nature = 3;
+	required PKS_ZC_Currencies currencies = 4;
+}
+
+message PKS_ZC_ENTER_ZONE 0x10000050
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_NO_CHARACTER = 1;
+		FAIL_NO_ZONE = 2;
+		FULLPC = 3;
+	}
+
+	required RESULT result = 1;
+	required int32 zoneID = 2;
+	required int32 totalchannel = 4;
+	required int32 channel = 3;
+	required PKS_ZC_CHARACTER_ENTER myself = 5;
+}
+
+message PKS_ZC_CHARACTER_ENTERList 0x10000071
+{
+	repeated PKS_ZC_CHARACTER_ENTER character_list = 1;
+}
+
+message PKS_ZC_NPC_INFOList 0x10000072
+{
+	repeated PKS_ZC_NPC_INFO npc_list = 1;
+}
+
+message PKS_ZC_MONSTER_INFOList 0x10000073
+{
+	repeated PKS_ZC_MONSTER_INFO monster_list = 1;
+}
+
+message PKS_ZC_DERIVE_INFOList 0x10000074
+{
+	repeated PKS_ZC_DERIVE_INFO derive_list = 1;
+}
+
+message PKS_ZC_PET_INFOList 0x10000075
+{
+	repeated PKS_ZC_PET_INFO pet_list = 1;
+}
+
+message PKS_ZC_APC_INFOList 0x10000076
+{
+	repeated PKS_ZC_APC_INFO Apc_list = 1;
+}
+
+message PKS_ZC_CHANGECHANNEL 0x10000052
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_FULL = 1;
+	}
+
+	required RESULT result = 1;
+	required int32 CAPTCHA = 3;
+	required string ip = 4;
+	required int32 port = 2;
+}
+
+message PKS_ZC_REVIVE 0x10000060
+{
+	enum RESULT
+	{
+		SUCCESS_RECALL = 0;
+		SUCCESS_REVIVE = 1;
+		FAILED_NO_DEAD = 2;
+		FAILED_NOTENOUGH_GOLD = 3;
+		FAILED_UNKNOWN = -1;
+	}
+
+	required RESULT result = 1;
+	required int32 instance_id = 2;
+	required int32 left_gold = 3;
+	required int32 cool_time = 4;
+	required PKS_ZC_CHARACTER_STAT stat = 5;
+	required PKS_ZC_NATURELIST nature = 6;
+	required PKS_ZC_Currencies currencies = 7;
+}
+
+message PKS_ZC_GUIDE_INFO 0x10000061
+{
+	required int32 GuideId = 1;
+}
+// ================================================================
+// =============================================== Character Sync
+// ================================================================
+
+message PKS_ZC_FieldObject_MOVE 0x10000100
+{
+	enum MoveType
+	{
+		COMMON = 0;
+		KnockFly = 1;
+		Charge = 2;
+	}
+	required MoveType movetype = 7;
+	required int32 instance_id = 1;
+	required int32 target_id = 2;
+	required PKS_ZC_VEC2 destination = 3;
+	required PKS_ZC_VEC2 position = 4;
+	required float speed_scale = 5;
+	required float duration = 6;
+}
+
+message PKS_ZC_FieldObject_IDEL 0x10000101
+{
+	required int32 instance_id = 1;
+	required PKS_ZC_VEC2 position = 4;
+}
+
+message PKS_ZC_FieldObject_Position 0x10000102
+{
+	repeated PKS_ZC_FieldObject_MOVE moveList = 1;
+}
+
+message PKS_ZC_CHARACTER_STOP 0x10000110
+{
+	required int32 instance_id = 1;
+	required PKS_ZC_VEC2 position = 2;
+}
+
+message PKS_ZC_CHARACTER_HP 0x10000120
+{
+	required int32 instance_id = 1;
+	required int32 max_hp = 2;
+	required int32 hp = 3;
+}
+
+message PKS_ZC_CHARACTER_EP 0x10000121
+{
+	required int32 instance_id = 1;
+	required int32 max_ep = 2;
+	required int32 ep = 3;
+}
+
+message PKS_ZC_CHARACTER_HPEP 0x10000122
+{
+	repeated PKS_ZC_CHARACTER_HP hplist = 1;
+	repeated PKS_ZC_CHARACTER_EP eplist = 2;
+}
+
+message PKS_ZC_BUFF 0x10000131
+{
+	required uint32 buff_instanceid = 1;
+	required int32 owner_instance_id = 2;
+    required int32 id = 3;
+	required int32 caster_instance_id = 5;
+	required int32 level = 4;
+	required float remnanttime = 6;
+}
+
+message PKS_ZC_CONTRAL 0x10000132
+{
+	enum Result
+	{
+		isNotAttack = 1;
+		isNotSkill = 2;
+		isNotMove = 0;
+		isNotUseItem = 3;
+		isInvincible = 4;
+	}
+	required uint32 InstanceID = 1;
+	required bool value = 2;
+	required Result controlType = 3;
+	required float remnanttime = 4;
+}
+
+message PKS_ZC_CHARACTER_BUFF 0x10000130
+{
+	required int32 instance_id = 1;
+	repeated PKS_ZC_BUFF buff_list = 2;
+}
+
+message PKS_ZC_SKILLBIND 0x10000140
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_IS_CD = 1;
+		FAILED_NOT_AVAILABLE = 2;
+	}
+
+	required int32 btn1 = 1;
+	required int32 btn2 = 2;
+	required int32 btn3 = 3;
+	required RESULT result = 4;
+}
+
+message PKS_ZC_SKILLUP 0x10000141
+{
+	required int32 skilllevel = 1;
+	required int32 skillid = 2;
+}
+
+message PKS_ZC_SKILL_SKILLPROCESS 0x10000150
+{
+	required int32 instance_id = 1;
+	required float posX = 2;
+	required float posZ = 3;
+	required float input_posX = 4;
+	required float input_posZ = 5;
+}
+
+
+message PKS_ZC_BUFF_ITEM 0x10000143
+{
+	required uint32 Uid = 1;
+	required float Time = 2;
+	required int32 Id = 3;
+	required int32 Count = 4;
+}
+
+message PKS_ZC_BUFFS 0x10000144
+{
+	required int32 OwnerId = 1;
+	repeated PKS_ZC_BUFF_ITEM Buffs = 2;
+}
+
+// ================================================================
+// ================================================== Battle Sync
+// ================================================================
+message PKS_ZC_DAMAGE 0x10000200
+{
+	enum RESULT_TYPE
+	{
+		NONE = 0;
+		BLOCKED = 1;
+		DODGE = 2;
+		DEAD = 3;
+		ADDHP = 4;
+		Critical = 5;
+	}
+    required int32 target_id = 1;
+	required RESULT_TYPE type = 2;
+	required bool is_critical = 3;
+	required bool is_hit = 4;
+	required int32 damage = 5;
+	required int32 damage_fixed = 6;
+	required int32 hp_result = 7;
+}
+
+message PKS_ZC_CHARACTER_ATTACK 0x10000210
+{
+	required int32 attacker_id = 1;
+	required int32 attack_speed = 2;
+	repeated PKS_ZC_DAMAGE damage_list = 3;
+}
+
+message PKS_ZC_CHARACTER_SKILL 0x10000211
+{
+	enum RESULT_TYPE
+		{
+			SUCCESS = 0;
+			TARGET_NOFOUND = 1;
+			TARGET_ONDEAD = 2;
+			TARGET_OUTRANGE = 3;
+			CAST_FAIL = 4;
+			NOTCOOLDOWN = 5;
+			WAITING = 6;
+			DONEANDWAIT = 7;
+			ISNOTENOUGHENERGY = 8;
+			CHANGE_SKILL = 9;
+			COOLDOWN_SKILL = 10;
+			NEEDCHARGE = 11;
+		}
+	required int32 attacker_id = 1;
+	required int32 skill_id = 2;	
+	repeated PKS_ZC_DAMAGE damage_list = 3;
+	required RESULT_TYPE type = 4;
+	required float PosX = 5;
+	required float PosY = 6;
+}
+
+message PKS_ZC_CHARACTER_BUFFDAMAGE 0x10000212
+{
+	required int32 attacker_id = 1;
+	required int32 attack_speed = 2;
+	repeated PKS_ZC_DAMAGE damage_list = 3;
+	required int32 skill_id = 4;
+	required int32 fatherskill_id = 5;
+	required string buff_name = 6;
+}
+
+message PKS_ZC_REWARD 0x10000220
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		INVENTORY_FULL = 1;
+	}
+
+	required int32 instance_id = 1;
+
+    required int32 reward_gold = 2;
+	required uint32 reward_exp = 3;	
+	required int32 total_gold = 4;
+	required uint32 total_exp = 5;	
+	
+	required string reward_type = 6;
+	repeated PKS_ZC_ITEM reward_card_list = 7;
+	repeated PKS_ZC_ITEM reward_card_update = 9;
+	required RESULT result = 8;
+}
+
+message PKS_ZC_UPDATE_ITEMS 0x10000221
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		INVENTORY_FULL = 1;
+		ADD_ITEM_ERROR = 2;
+		NOT_FIND_ITEM = 3;
+	}
+
+	required RESULT Result = 1;
+	required int32 InstanceId = 2;	
+	repeated PKS_ZC_ITEM AddItems = 3;
+	repeated PKS_ZC_ITEM UpdateItems = 4;
+}
+
+message PKS_ZC_LEVELUP 0x10000230
+{
+	required int32 instance_id = 1;	
+	required PKS_ZC_CHARACTER_INFO info = 2;
+	required PKS_ZC_CHARACTER_STAT stat = 3;
+	required PKS_ZC_NATURELIST nature = 5;
+	required PKS_ZC_Currencies currencies = 4;
+}
+
+// ================================================================
+// ===================================================== Card
+// ================================================================
+message PKS_ZC_CARD_EQUIP 0x10000300
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_NOTENOUGH_COST = 1;
+		FAILED_NOTFOUND_CARD = 2;
+	}
+	required int32 card_uid = 1;
+	required int32 equip_index = 2;
+	required PKS_ZC_CHARACTER_STAT stat = 3;
+	required int32 character_uid = 4;
+	required int32 card_type_id = 5;
+	required PKS_ZC_NATURELIST nature = 7;
+	required PKS_ZC_Currencies currencies = 8;
+	required RESULT result = 6;
+}
+
+message PKS_ZC_CARD_UNEQUIP 0x10000301
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_NOTFOUND_CARD = 1;
+	}
+	required int32 card_uid = 1;
+	required int32 unequip_index = 2;
+	required PKS_ZC_CHARACTER_STAT stat = 3;	
+	required int32 character_uid = 4;
+	required int32 card_type_id = 5;
+	required PKS_ZC_NATURELIST nature = 7;
+	required PKS_ZC_Currencies currencies = 8;
+	required RESULT result = 6;
+}
+
+message PKS_ZC_CARD_REMOVE 0x10000302
+{
+	repeated int32 card_uid_list = 1;
+}
+
+message PKS_ZC_ITEM_USE 0x10000306
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_CANNOTUSETHIS = 1;
+		FAILED_NOTFOUND_ITEM = 2;
+		FAILED_OTHERERROR = 3;
+		FAILED_INVENTORYISFULL = 4;
+		FAILED_LEVELLIMIT = 5;
+	}
+	required RESULT Result = 1;
+	repeated int32 Ids = 2;
+	repeated int32 Nums = 3;
+	required int32 TypeId = 4;
+	//required int32 item_uid = 1;
+	//repeated PKS_ZC_ITEM itemsadd = 4;
+	//required PKS_ZC_CHARACTER_STAT stat = 5;
+	//repeated PKS_ZC_ITEM itemsupdate = 7;
+	//required RESULT result = 6;
+	//required PKS_ZC_NATURELIST nature = 8;
+	//required PKS_ZC_Currencies currencies = 9;
+}
+
+message PKS_ZC_ITEM_UNRAVEL 0x10000310
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_CANNOTUNRAVELTHIS = 1;
+		FAILED_NOTFOUND_ITEM = 2;
+		FAILED_INVENTORYISFULL = 3;
+		FAILED_ITEMISEQUIP = 4;
+	}
+	required int32 isupdatef = 1;
+	required PKS_ZC_ITEM itemsp = 2;
+	required int32 isupdates = 3;
+	required PKS_ZC_ITEM itemjj = 4;
+	required int32 removeuid = 5;
+	required RESULT result = 6;
+}
+
+message PKS_CC_OPEN_SHOP 0x10000400
+{	
+	required int32 shop_type = 1;
+	repeated int32 item_list = 2;  
+	repeated int32 isbuy = 3;  
+	required bool shoudongRefresh = 4;  
+}
+
+message PKS_ZC_SHOP_CARD 0x10000401
+{
+	required int32 open_level = 1;
+	required int32 card_id = 2;    
+}
+
+message PKS_ZC_SHOP_ITEM 0x10000402
+{
+	required int32 open_level = 1;
+	required int32 item_type_id = 2;    
+}
+
+message PKS_ZC_OPEN_ITEM_SHOP 0x10000404
+{	
+	required int32 shop_type = 1;
+	repeated PKS_ZC_SHOP_ITEM items_list = 2;    
+}
+
+message PKS_ZC_CARD_ADD 0x10000405
+{
+	repeated PKS_ZC_ITEM card_list = 1;
+}
+
+message PKS_ZC_ITEM_ADD 0x10000406
+{
+	repeated PKS_ZC_ITEM items_list = 1;
+}
+
+message PKS_CC_CARD_BUY 0x10000410
+{	
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_NOTENOUGH_GOLD = 1;
+		FAILED_NOTFOUND_CARD = 2;
+		FAILED_INVENTORY_FULL = 3;
+	}
+	required int32 shopid = 8;
+	required RESULT result = 3;	
+	required int32 card_type_id = 4;	
+	required int32 num = 5;
+	repeated PKS_ZC_ITEM itemsadd = 6;
+	repeated PKS_ZC_ITEM itemsupdate = 7;
+}
+
+message PKS_CC_ITEM_BUY 0x10000411
+{	
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_NOTENOUGH_GOLD = 1;
+		FAILED_NOTFOUND_ITEM = 2;
+		FAILED_INVENTORY_FULL = 3;
+	}
+	
+	required int32 shop_type = 1;
+	required int32 shop_index = 2;
+
+	required RESULT result = 3;	
+	required PKS_ZC_ITEM item = 4;	
+	required int32 left_gold = 5;
+}
+
+message PKS_CC_CARD_SELL 0x10000420
+{	
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_NOHAVE_CARD = 1;
+		FAILED_EQUIPED_CARD = 2;
+		FAILED_TIMEOUT = 3;
+	}
+	
+	required int32 card_uid = 1;
+	required int32 sellnum = 5;
+	required RESULT result = 2;	
+	repeated PKS_ZC_ITEM update_card_list = 3;
+	required int32 left_gold = 4;
+}
+
+//message PKS_CC_ITEM_SELL 0x10000421
+//{	
+//	enum RESULT
+//	{
+//		SUCCESS = 0;
+//		FAILED_NOHAVE_ITEM = 1;
+//		FAILED_EQUIPED_ITEM = 2;
+//		
+//	}
+//	
+//	required int32 item_uid = 1;
+//
+//	required RESULT result = 2;	
+//	repeated int32 removed_item_list = 3;
+//	required int32 left_gold = 4;
+//}
+
+message PKS_ZC_ITEM_SELL 0x10000421
+{	
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_NOHAVE_ITEM = 1;
+		FAILED_EQUIPED_ITEM = 2;
+		
+	}
+	required RESULT Result = 1;	
+}
+
+
+message PKS_ZC_CARD_UPGRADE 0x10000430
+{	
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_NOHAVE_TARGET_CARD = 1;
+		FAILED_NOHAVE_RECIPE_CARD = 2;
+		FAILED_EQUIPED_RECIPE_CARD = 3;
+		FAILED_NOTENOUGH_GOLD = 4;
+		FAILED_MAX_LEVEL = 5;
+	}
+	required RESULT result = 1;	
+	required PKS_ZC_ITEM card = 2;
+	repeated int32 removed_card_list = 3;
+	required int32 left_gold = 4;
+	required int32 cost = 5;
+	required string result_type = 6;
+}
+
+message PKS_ZC_ITEM_UPGRADE 0x10000431
+{	
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_NOHAVE_TARGET_ITEM = 1;
+		FAILED_NOHAVE_RECIPE_ITEM = 2;
+		FAILED_EQUIPED_RECIPE_ITEM = 3;
+		FAILED_NOTENOUGH_GOLD = 4;
+		FAILED_MAX_LEVEL = 5;
+	}
+	required RESULT result = 1;	
+	required PKS_ZC_ITEM card = 2;
+	repeated int32 removed_item_list = 3;
+	required int32 left_gold = 4;
+	required int32 cost = 5;
+	required string result_type = 6;
+}
+
+message PKS_ZC_CARD_EVOLUTION 0x10000440
+{	
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_NOHAVE_TARGET_CARD = 1;
+		FAILED_EQUIPED_TARGET_CARD = 2;
+		FAILED_NOTMAXLEVEL_TARGET_CARD = 3;
+		FAILED_NOHAVE_RECIPE_CARD = 4;
+		
+		FAILED_EQUIPED_RECIPE_CARD = 5;
+		FAILED_NOTENOUGH_GOLD = 6;
+		FAILED_DISABLE_EVOLUTION_CARD = 7;
+	}
+	required RESULT result = 1;
+	repeated int32 removed_card_list = 2;
+	required int32 left_gold = 3;
+	required PKS_ZC_CARD reward_card = 4;
+	required string result_type = 5;
+}
+
+message PKS_ZC_ITEM_EVOLUTION 0x10000440
+{	
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_NOHAVE_TARGET_ITEM = 1;
+		FAILED_EQUIPED_TARGET_ITEM = 2;
+		FAILED_NOTMAXLEVEL_TARGET_ITEM = 3;
+		FAILED_NOHAVE_RECIPE_ITEM = 4;
+		
+		FAILED_EQUIPED_RECIPE_ITEM = 5;
+		FAILED_NOTENOUGH_GOLD = 6;
+		FAILED_DISABLE_EVOLUTION_ITEM = 7;
+	}
+	required RESULT result = 1;
+	repeated int32 removed_item_list = 2;
+	required int32 left_gold = 3;
+	required PKS_ZC_CARD reward_item = 4;
+	required string result_type = 5;
+}
+
+message PKS_ZC_PC_EQUIP_INFO 0x20000263
+{	
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_NOT_IN_MAP = 1;
+	}
+	required RESULT result = 1;
+	required int32 instance_id = 2;
+	repeated PKS_ZC_ITEM item_info = 3;
+	required string jobID = 4;
+
+}
+
+// ====================================================
+// ======================== Quest
+// ==================================================
+
+message PKS_ZC_QUEST 0x10000460
+{
+	required int32 quest_id = 1;
+	required int32 complete_count = 2;
+	required bool is_end = 3;
+	required bool is_complete = 4;
+	repeated PKS_ZC_PROPERTY progress_list = 5;
+	required int64 time_begin = 6;
+	required bool is_failed = 7;
+}
+
+message PKS_ZC_QUEST_FAILED 0x10000462
+{
+	required int32 quest_id = 1;
+	required string failed_code = 2;
+}
+
+message PKS_ZC_QUEST_NOTIFY 0x10000464
+{
+	required int32 quest_id = 1;
+}
+
+message PKS_ZC_QUEST_REMOVE 0x10000470
+{
+	required bool is_clearall = 1;
+	required int32 quest_id = 2;
+}
+
+// =================================================
+// ======================== Commmunication
+// =================================================
+
+message PKS_ZC_CHAT 0x10000500
+{
+	required int32 sender_uid  = 1;
+	required string sender_name = 2;
+	required string sender_portrait_id = 3;
+	required string message = 4;
+}
+
+message PKS_ZC_GlobalCHAT 0x10000502
+{
+	enum SenderType
+	{
+		pc = 0;
+		npc = 1;
+		System = 2;
+		GM = 3;
+	}
+	enum SendType
+	{
+		Map = 0;
+		Team = 1;
+		Global = 2;
+		Person = 3;
+	}
+	repeated int32 target_uid = 5;
+	required int32 sender_uid  = 1;
+	required string sender_name = 2;
+	required SenderType sender_type = 3;
+	required SendType send_type = 6;
+	required string message = 4;
+}
+
+message PKS_ZC_GlobalCHATList 0x10000503
+{
+	repeated PKS_ZC_GlobalCHAT chatlist = 1;
+}
+
+message PKS_ZC_EMOTICON 0x10000510
+{	
+	required int32 character_instance_id  = 1;
+	required int32 emot_id = 2;
+}
+
+message PKS_ZC_EMOTICONLIST 0x10000511
+{	
+	repeated PKS_ZC_EMOTICON emoticonList  = 1;
+}
+
+message PKS_ZC_POSE 0x10000520
+{	
+	required int32 character_instance_id  = 1;
+	required int32 pose_id = 2;
+}
+
+// =================================================
+// ======================== Interaction
+// =================================================
+
+message PKS_ZC_INTERACTION 0x10001001
+{	
+	required int32 sender_instance_id = 1;
+	required string message = 2;
+	required string argString = 3;
+	required int32 argInt = 4;
+	required float argFloat = 5;
+}
+
+message PKS_ZC_INTERACTION_BROADCAST 0x10001002
+{	
+	required PKS_ZC_INTERACTION interaction = 1;
+}
+
+message PKS_ZC_INTERACTION_UIOPEN 0x10001003
+{
+	required int32 id = 1;
+}
+
+message PKS_SS_STRUCT 0x10002003
+{
+	required int32 first = 1;
+	required int32 second = 2;
+	required int32 third = 3;
+	required int32 fourth = 4;
+	required int32 fifth = 5;
+	required int32 sixth = 6;
+	required int32 seven = 7;
+	required int32 eighth = 8;
+	required int32 ninth = 9;
+	required bool success = 10;
+}
+
+// =================================================
+// ============================= GM tool
+// =================================================
+
+message PKS_ZC_GM_RESPONSE 0x80000888
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		ERROR1 = 1;
+		ERROR2 = 2;
+	}
+	required int32 gm_code = 1;
+	required RESULT result = 2; 
+	repeated int32 int_param = 3;
+	repeated float float_param = 4;
+	repeated bool bool_param = 5;
+	repeated string string_param = 6;
+}
+
+// =================================================
+// ============================= Time Filter
+// =================================================
+
+message PKS_ZC_TIME_FILTER 0x10000700
+{
+	enum FilterType
+	{
+		OddOrEvenNum = 0;
+		DayOfTheWeek = 1;
+		TimePeriod = 2;
+	}
+
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_TIME_FILTER_ERROR = 1;
+	}
+	required FilterType Type = 1;
+	required RESULT Result = 2;
+
+	required bool BoolResult = 3;
+	required string TheDayOfWeek = 4;
+}
+
+message PKS_ZC_GET_ACTIVITY 0x10000710
+{
+	repeated PKS_ZC_ACTIVITY Activity = 1;
+}
+
+message PKS_ZC_ACTIVITY 0x10000720
+{
+	required int32 Id = 1;
+	required bool isStart = 2;
+}
+
+message PKS_SET_TIMESPAN 0x10000730
+{
+	required int32 WatchId = 1;
+	required string SpendTime = 2;
+}
+
+// =================================================
+// ============================= Dungeon
+// =================================================
+
+message PKS_ZC_DUNGEONSTATES 0x10000910
+{
+	repeated PKS_ZC_DUNGEON_STATE DungeonStates = 1;
+}
+
+message PKS_ZC_DUNGEON_STATE 0x10000911
+{
+	required int32 DungeonUid = 1;
+	required int32 CurrentNumber = 2;
+	required int32 StarCount = 3;
+	required string StarState = 4;
+}
+
+message PKS_ZC_ENTER_DUNGEON 0x10000920
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_REST_COUNT_MAX = 1;
+		FAIL_NUMBER_MAX = 2;
+		FAIL_STAMINA_MAX = 3;
+		FAIL_NO_DIAMOND = 4;		
+		FAIL_NO_STAMINA = 5;
+		FAIL_NO_NUMBER = 6;
+		FAIL_NO_DUNGEON = 7;
+	}
+	enum DungeonType
+	{
+		Dungeon = 0;
+		Wonderland = 1;
+	}
+
+	required RESULT Result = 1;
+	required int32 DungeonId = 2;
+	required int32 DungeonUid = 3;
+	repeated PKS_ZC_CHARACTER_ENTER CharacterList = 4;
+	required DungeonType Type = 5;
+}
+
+message PKS_ZC_CHECK_DUNGEON 0x10000921
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_REST_COUNT_MAX = 1;
+		FAIL_NUMBER_MAX = 2;
+		FAIL_STAMINA_MAX = 3;
+		FAIL_NO_DIAMOND = 4;		
+		FAIL_NO_STAMINA = 5;
+		FAIL_NO_NUMBER = 6;
+		FAIL_NO_DUNGEON = 7;
+	}
+
+	required RESULT Result = 1;
+
+}
+
+message PKS_ZC_RESET_DUNGEON_NUMBER 0x10000930
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_REST_COUNT_MAX = 1;
+		FAIL_NUMBER_MAX = 2;
+		FAIL_STAMINA_MAX = 3;
+		FAIL_NO_DIAMOND = 4;		
+		FAIL_NO_STAMINA = 5;
+		FAIL_NO_NUMBER = 6;
+		FAIL_NO_DUNGEON = 7;
+	}
+
+	required RESULT Result = 1;
+	//required int32 Diamond = 2;
+	required int32 Number = 2;
+}
+
+message PKS_ZC_RESET_DUNGEON_STAMINA 0x10000940
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_REST_COUNT_MAX = 1;
+		FAIL_NUMBER_MAX = 2;
+		FAIL_STAMINA_MAX = 3;
+		FAIL_NO_DIAMOND = 4;		
+		FAIL_NO_STAMINA = 5;
+		FAIL_NO_NUMBER = 6;
+		FAIL_NO_DUNGEON = 7;
+	}
+
+	required RESULT Result = 1;
+	required int32 Diamond = 2;
+	required int32 Stamina = 3;
+}
+
+message PKS_ZC_DUNGEON_RAIDS 0x10000950
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_REST_COUNT_MAX = 1;
+		FAIL_NUMBER_MAX = 2;
+		FAIL_STAMINA_MAX = 3;
+		FAIL_NO_DIAMOND = 4;		
+		FAIL_NO_STAMINA = 5;
+		FAIL_NO_NUMBER = 6;
+		FAIL_NO_DUNGEON = 7;
+		FAIL_NO_RAID_LOTTERY = 8;
+	}
+	required RESULT Result = 1;
+	repeated PKS_ZC_DUNGEON_REWARD Raids = 2;
+}
+
+message PKS_ZC_DUNGEON_REWARD 0x10000951
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_REST_COUNT_MAX = 1;
+		FAIL_NUMBER_MAX = 2;
+		FAIL_STAMINA_MAX = 3;
+		FAIL_NO_DIAMOND = 4;		
+		FAIL_NO_STAMINA = 5;
+		FAIL_NO_NUMBER = 6;
+		FAIL_NO_DUNGEON = 7;
+		FAIL_NO_PASS = 8;
+	}
+	required RESULT Result = 1;
+	repeated PKS_ZC_REWARD_ITEM Rewards = 2;
+	required int32 StarCount = 3;
+	required string StarState = 4;
+	required int32 PrayCount = 5;
+}
+
+message PKS_ZC_REWARD_ITEM 0x10000952
+{
+	required int32 RewardId = 1;
+	required int32 Number = 2;
+}
+
+message PKS_ZC_DUNGEON_CHANGESERVER 0x10000960
+{
+	required int32 DungeonId = 1;
+	required int32 DungeonUid = 2;
+	required int32 Captcha = 3;
+	required string Ip = 4;
+	required int32 Port = 5;
+}
+
+// =================================================
+// ============================= Email
+// =================================================
+
+message PKS_ZC_EMAIL_OPENE_BOX 0x10001000
+{
+	repeated PKS_ZC_EMAIL_ITEM Emails = 1;
+}
+
+message PKS_ZC_EMAIL_ITEM 0x10001010
+{
+	required int32 Uid = 1;
+	required int32 IsRead = 2;
+	required string From = 3;
+	required string Title = 4;
+	required string Rewards = 5;
+	required string Time = 6;
+}
+
+message PKS_ZC_EMAIL_READ 0x10001020
+{
+	required int32 Uid = 1;
+	required string Body = 2;
+	//repeated PKS_ZC_EMAIL_ATTACHMENT Attachments = 3;
+}
+
+message PKS_ZC_EMAIL_ATTACHMENT 0x10001025
+{
+	enum AttachmentType
+    {
+        Item = 0;
+        Gold = 1;
+        Heart = 2;
+        Stamina = 3;
+		Diamond = 4;
+    }
+	required AttachmentType Type = 1;
+	required int32 ItemId = 2;
+	required int32 Count = 3;
+	required int32 Uid = 4;
+}
+
+message PKS_ZC_ATTACHMENT_PICKUP 0x10001030
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAILED_OTHERERROR = 1;
+	}
+	required RESULT Result = 1;
+	//required int32 itemUid = 1;
+	//repeated PKS_ZC_ITEM itemsadd = 4;
+	//required PKS_ZC_CHARACTER_STAT stat = 5;
+	//repeated PKS_ZC_ITEM itemsupdate = 7;
+
+	//required PKS_ZC_NATURELIST nature = 3;
+	//required PKS_ZC_Currencies currencies = 8;
+}
+
+message PKS_ZC_EMAIL_REMIND 0x10001040
+{
+	required int32 IsNew = 1;
+}
+
+// =================================================
+// ============================= Task
+// =================================================
+
+message PKS_ZC_TASKINFO 0x10001100
+{
+	required int32 MainTaskId = 1;
+	required int32 MainTaskNumber = 2;
+	required int32 HideTaskId = 3;
+	required int32 HideTaskNumber = 4;
+	repeated int32 FinishIds = 5;
+}
+
+message PKS_ZC_UPDATE_TASKINFO 0x10001110
+{
+	required int32 TaskId = 1;
+	required int32 TaskNumber = 2;
+	required int32 TaskState = 3;
+}
+
+message PKS_ZC_AnotherSiteLogin 0x10002001
+{
+	required int32 TaskId = 1;
+}
+
+// =================================================
+// ============================= wonderland
+// =================================================
+
+message PKS_ZC_WONDERLAND_STATE 0x10001050
+{
+	required int32 ChallengeCount = 1;
+	required string MonsterState = 2;
+	required int32 RewardCount = 3;
+	repeated PKS_ZC_WONDERLAND_STAGE Stages =4;
+	required int32 HighestStage = 5;
+	required int32 PrayNumber = 6;
+	required int32 PrayDegree = 7;
+	required int32 RedemptionNumber = 8;
+}
+
+message PKS_ZC_WONDERLAND_STAGE 0x10001051
+{
+	required int32 Stage = 1;
+	required string BoxReward = 2;
+	required int32 TotalStarCount = 3;
+	repeated PKS_ZC_WONDERLAND_INFO Infos =4;
+}
+
+message PKS_ZC_WONDERLAND_INFO 0x10001052
+{
+	required int32 WonderlandId = 1;
+	required int32 StarCount = 2;
+	required string StarState = 3;
+}
+
+message PKS_ZC_ADD_WONDERLAND_C_NUMBER 0x10001053
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_REST_COUNT_MAX = 1;
+		FAIL_NUMBER_MAX = 2;
+		FAIL_STAMINA_MAX = 3;
+		FAIL_NO_DIAMOND = 4;		
+		FAIL_NO_STAMINA = 5;
+		FAIL_NO_NUMBER = 6;
+		FAIL_NO_WONDERLAND = 7;
+	}
+
+	required RESULT Result = 1;
+	required int32 CostDiamond = 2;
+	required int32 Number = 3;
+}
+
+message PKS_ZC_ADD_WONDERLAND_R_NUMBER 0x10001054
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_REST_COUNT_MAX = 1;
+		FAIL_NUMBER_MAX = 2;
+		FAIL_STAMINA_MAX = 3;
+		FAIL_NO_DIAMOND = 4;		
+		FAIL_NO_STAMINA = 5;
+		FAIL_NO_NUMBER = 6;
+		FAIL_NO_WONDERLAND = 7;
+	}
+
+	required RESULT Result = 1;
+	required int32 CostDiamond = 2;
+	required int32 Number = 3;
+}
+
+message PKS_ZC_WONDERLAND_PRAYER 0x10001055
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_NO_RESARD_NUMBER = 1;		
+		FAIL_NO_RUN_PRAY = 3;
+		FAIL_NO_DEGREE = 4;
+		FAIL_NO_STAGE = 5;
+		FAIL_NO_DIAMOND = 6;
+	}
+
+	required RESULT Result = 1;
+	required string MonsterState = 2;
+	required int32 RewardCount = 3;
+	required int32 HighestStage = 4;
+	required int32 PrayNumber = 5;
+	required int32 PrayDegree = 6;
+	required int32 RedemptionNumber = 7;
+}
+
+message PKS_ZC_GET_PRAYER 0x10001056
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_NO_RESARD_NUMBER = 1;		
+		FAIL_NO_RUN_PRAY = 2;
+		FAIL_NO_DEGREE = 3;
+		FAIL_NO_STAGE = 4;
+	}
+	required RESULT Result = 1;
+}
+
+message PKS_ZC_AREA_REWARD 0x10001060
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		FAIL_HAS_OPENED = 1;		
+		FAIL_NO_STAR = 2;
+	}
+	required RESULT Result = 1;
+}
+
+// =================================================
+// ============================= JJC
+// =================================================
+
+message PKS_ZC_CHARACTER_CHALLENGE_INFO 0x10001101
+{
+	required PKS_ZC_CHARACTER_INFO challenge_info = 1;
+	required PKS_ZC_CHARACTER_STAT challenge_stat = 2;
+	required int32 defense_skill1 = 3;
+	required int32 defense_skill2 = 4;
+	required int32 defense_skill3 = 5;
+	required int32 skill1_level = 6;
+	required int32 skill2_level = 7;
+	required int32 skill3_level = 8;
+	required int32 power = 9;
+	required int32 rank = 10;
+	required PKS_ZC_NATURELIST nature = 11;
+	required PKS_ZC_Currencies currencies = 12;
+}
+
+message PKS_ZC_CHARACTER_JJC 0x10001102
+{
+	required int32 pc_uid = 1;
+	required int32 rank = 2;
+	required int32 power = 3;
+	required int32 defense_skill_1 = 4;
+	required int32 defense_skill_2 = 5;
+	required int32 defense_skill_3 = 6;
+	required int32 skill_1_level = 7;
+	required int32 skill_2_level = 8;
+	required int32 skill_3_level = 9;
+	required int32 challenged_time = 10;
+	required int32 challenge_CD = 11;
+	required int32 bought_time = 12;
+	required int32 highest_rank = 13;
+	required int32 yesterday_rank = 14;
+}
+
+message PKS_ZC_JJC_TOP3 0x10001103
+{
+	required PKS_ZC_CHARACTER_CHALLENGE_INFO top_pc1 = 1;
+	required PKS_ZC_CHARACTER_CHALLENGE_INFO top_pc2 = 2;
+	required PKS_ZC_CHARACTER_CHALLENGE_INFO top_pc3 = 3;
+}
+
+message PKS_ZC_JJC_CHALLENGER 0x10001104
+{
+	required PKS_ZC_CHARACTER_CHALLENGE_INFO challenge_pc1 = 1;
+	required PKS_ZC_CHARACTER_CHALLENGE_INFO challenge_pc2 = 2;
+	required PKS_ZC_CHARACTER_CHALLENGE_INFO challenge_pc3 = 3;
+}
+
+message PKS_ZC_JJC_CHALLENGE_PC 0x10001105
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		WRONG_INDEX = 1;
+		WRONG_UID = 2;
+		STILL_CD = 3;
+		RESET_CHALLENGER = 4;
+	}
+	required RESULT result = 1;
+	repeated string battle_scripts = 2;
+	required PKS_ZC_CHARACTER_STAT vs_stat = 3;
+	required int32 pc_uid = 4;
+	required int32 pc_haircolor = 5;
+	required string pc_name = 6;
+	required int32 pc_level = 7;
+	required int32 pc_rank = 8;
+	required int32 win_or_lose = 9;
+	required int32 vs_uid = 10;
+	required int32 vs_haircolor = 11;
+	required string vs_name = 12; 
+	required int32 vs_level = 13;
+	required int32 vs_rank = 14;
+	required PKS_ZC_NATURELIST nature = 15;
+	required PKS_ZC_Currencies currencies = 16;
+}
+
+message PKS_ZC_JJC_CHALLENGE_NOW 0x10001106
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		NOT_ENOUGH_DIAMOND = 1; 
+		WRONG_COST_DIAMOND = 2;
+	}
+	required RESULT result = 1;
+
+}
+
+message PKS_ZC_JJC_BUY_CHALLENGE 0x10001107
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		NOT_ENOUGH_DIAMOND = 1; 
+		WRONG_COST_DIAMOND = 2;
+		IS_BUY_LIMIT = 3;
+	}
+	required RESULT result = 1;
+
+}
+
+message PKS_ZC_JJC_PC_RANK_INFO 0x10001108
+{
+	required int32 pc_uid = 1;
+	required string name = 2;
+	required int32 level = 3;
+	required int32 haircolor = 4;
+	required string Job = 5;
+	required int32 Root = 6;
+}
+
+message PKS_ZC_JJC_SHOW_RANK 0x10001109
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+	}
+	required RESULT result = 1;
+	repeated PKS_ZC_JJC_PC_RANK_INFO rank_info_list = 2;
+
+}
+
+message PKS_ZC_JJC_SHOW_VS_RECORD 0x10001111
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+	}
+	required RESULT result = 1;
+	repeated string vs_record_list = 2;
+}
+
+message PKS_ZC_JJC_ENABLE 0x10001112
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		ALREADY_EXIST = 1;
+		NO_AUTH = 2;
+	}
+	required RESULT result = 1;
+    required int32 Rank = 2;
+}
+
+message PKS_ZC_BATTLE_ENTER 0x10001113
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		NO_JJC = 1;
+	}
+	required RESULT result = 1;
+	required int32 challenge_time = 2;
+	required int32 rank = 3;
+}
+
+message PKS_ZC_CHECK_ENTER 0x10001114
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		NO_JJC = 1;
+	}
+	required RESULT Result = 1;
+	required int32 Time = 2;
+	required int32 Rank = 3;
+}
+
+message PKS_ZC_JJC_SKILL 0x10001120
+{
+	repeated int32 Skills = 1;
+}
+
+message PKS_ZC_JJC_NEW 0x10001130
+{
+	required int32 New = 1;
+}
+
+message PKS_ZC_POWER 0x10001140
+{
+	required int32 Power = 1;
+}
+
+// =================================================
+// ============================= REINFORCE
+// =================================================
+message PKS_ZC_REINFORCE 0x10002101
+{
+	required int32 ItemUid = 1;
+	required int32 Slot1 = 2;
+	required int32 Slot2 = 3;
+	required int32 Slot3 = 4;
+	required int32 Slot4 = 5;
+	required int32 Slot5 = 6;
+	required int32 Slot6 = 7;
+}
+
+message PKS_ZC_REINFORCE_STATES 0x10002102
+{
+	repeated PKS_ZC_REINFORCE Reinforce = 1;
+}
+
+// =================================================
+// ============================= AbilityBook
+// =================================================
+
+message PKS_ZC_AbilityType 0x10003000
+{
+	enum RESULT
+	{
+		PRO_GROWTH = 0;
+		PRO_STRENGHTH = 1;
+		PRO_ARTIFICE = 2;
+		PRO_RESISTANCE = 3;
+		PRO_ENDURANCE = 4;
+		PRO_AGILITY = 5;
+		PRO_LUCK = 6;
+		PRO_MAX_HP = 7;
+		PRO_PHY_ATK = 8;
+		PRO_PHY_DEF = 9;
+		PRO_MGC_ATK = 10;
+		PRO_MGC_DEF = 11;
+		PRO_PHY_PURE_ATK = 12;
+		PRO_MGC_PURE_ATK = 13;
+		PRO_PHY_HIT = 14;
+		PRO_PHY_DODGE = 15;
+		PRO_MGC_HIT = 16;
+		PRO_MGC_DODGE = 17;
+		PRO_CRIT = 18;
+		PRO_TENACITY = 19;
+		IS_OPEN = 20;
+		IS_CLOSED = 21;
+	}
+	required RESULT AbilityType = 1;
+}
+
+message PKS_ZC_AbiltyAttribute 0x10003001
+{
+	required PKS_ZC_AbilityType type = 1;
+	required int32 count = 2;
+	required int32 color = 3;
+}
+
+message PKS_ZC_AbilityBook 0x10003002
+{
+	enum Result
+	{
+		SUCCESS = 0;
+		NOT_ENOUGH_MATERIAL = 1;
+		NOT_ENOUGH_VIRTUE = 2;
+		NEED_COMBINE = 3;
+	}
+	required int32 positionid = 1;
+	required PKS_ZC_AbiltyAttribute A1 = 2;
+	required PKS_ZC_AbiltyAttribute A2 = 3;
+	required PKS_ZC_AbiltyAttribute A3 = 4;
+	required int32 recastResultNum = 5;
+	required Result result = 6;
+}
+
+message PKS_ZC_RecastResult 0x10003003
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		CHOOSE_SUCCESS = 1;
+		NOT_BOOK_EXIST = 2;
+		NOT_ENOUGH_INTELLIGENCE = 3;
+		NOT_ENOUGH_DIAMOND = 4;
+		FAIL_UNKNOWN = 5;
+	}
+	required RESULT result = 1;
+	repeated PKS_ZC_AbilityBook books = 2;
+	required int32 require_diamond = 3;
+}
+
+message PKS_ZC_EnterWordAbilityBooksInfo 0x10003004
+{
+	repeated PKS_ZC_AbilityBook books = 1;
+}
+
+message PKS_ZC_PetResource 0x10003005
+{
+	required int32 petTypeId = 1;
+	repeated PKS_ZC_Coin Resources = 2;
+	required int32 Multiples = 3;
+}
+
+message PKS_ZC_PetResourcesList 0x10003006
+{
+	repeated PKS_ZC_PetResource ResourcesList = 1;
+}
+
+message PKS_ZC_AbilityOpenSlot2 0x10003007
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		NOT_ENOUGH_DIAMOND = 1;
+		NOT_BOOK_EXIST = 2;
+		ALREADY_OPEN = 3;
+	}
+	required RESULT result = 1;
+	required int32 positionid = 2;
+	required PKS_ZC_AbiltyAttribute A1 = 3;
+	required PKS_ZC_AbiltyAttribute A2 = 4;
+	required PKS_ZC_AbiltyAttribute A3 = 5;
+}
+
+message PKS_ZC_AbilityOpenSlot3 0x10003008
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		NOT_ENOUGH_DIAMOND = 1;
+		NOT_BOOK_EXIST = 2;
+		ALREADY_OPEN = 3;
+	}
+	required RESULT result = 1;
+	required int32 positionid = 2;
+	required PKS_ZC_AbiltyAttribute A1 = 3;
+	required PKS_ZC_AbiltyAttribute A2 = 4;
+	required PKS_ZC_AbiltyAttribute A3 = 5;
+}
+
+message PKS_ZC_AbilityOpenSlot2And3 0x10003009
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		NOT_ENOUGH_DIAMOND = 1;
+		NOT_BOOK_EXIST = 2;
+		ALREADY_OPEN = 3;
+	}
+	required RESULT result = 1;
+	required int32 positionid = 2;
+	required PKS_ZC_AbiltyAttribute A1 = 3;
+	required PKS_ZC_AbiltyAttribute A2 = 4;
+	required PKS_ZC_AbiltyAttribute A3 = 5;
+}
+
+message PKS_ZC_PetBuy 0x10003010
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		NOT_ENOUGH_VIRTUE = 1;
+		NOT_ENOUGH_ROLE_LV = 2;
+		NOT_ENOUGH_MATERIAL = 3;
+		NOT_ENOUGH_GOLD = 4;
+		FAIL_UNKNOWN = 5;
+	}
+	required RESULT result = 1;
+	required PKS_ZC_PET_INFO pet_info = 2;
+}
+
+message PKS_ZC_PetHatch 0x10003011
+{
+	enum RESULT
+	{
+		SUCCESS = 0;
+		NOT_ENOUGH_MATERIAL = 1;
+		FAIL_UNKNOWN = 2;
+	}
+	required RESULT result = 1;
+	required PKS_ZC_PET_INFO pet_info = 2;
+}
+
+// =================================================
+// ============================= Coin
+// =================================================
+
+message PKS_ZC_Coin 0x10004000
+{
+	required int32 CoinNum = 1;
+	required int32 Count = 2;
+}
+
+message PKS_ZC_Currencies 0x10004001
+{
+	repeated PKS_ZC_Coin Currencies = 1;
+}
+
+message PKS_ZC_NATURE 0x11000001
+{
+	required int32 key = 1;
+	required int32 value = 2;		
+}
+
+message PKS_ZC_NATURELIST 0x11000002
+{
+	enum Result
+	{
+		success = 0;
+		NoFieldObject = 1;
+	}
+	required int32 InstanceId = 1;
+	repeated PKS_ZC_NATURE list = 2;
+	required Result result = 3;
+}
+
+message PKS_ZC_OneNature 0x11000003
+{
+	required int32 instanceId = 3;
+	required int32 key = 1;
+	required int32 value = 2;		
+}
+
+message PKS_ZC_OneNatureList 0x11000004
+{
+	repeated PKS_ZC_OneNature list = 1;		
+}
+
+// =================================================
+// ============================= Other
+// =================================================
+message PKS_ZC_BOSSWORNING 0x12000001
+{
+	required int32 bossId = 1;		
+}
+
+// =================================================
+// ============================= Monster Card
+// =================================================
+
+message PKS_ZC_MONSTERCARD_INFO 0x10003100
+{
+	repeated PKS_ZC_MONSTERCARD_ITEM CardList = 1;
+	repeated PKS_ZC_MONSTERCARD_ITEM EquipList = 2;
+	repeated int32 StateList = 3;
+}
+
+message PKS_ZC_MONSTERCARD_ITEM 0x10003110
+{
+	required int32 CardUid = 1;
+	required int32 CardId = 2;
+	required int32 CardNum = 3;
+	required int32 CardSlot = 4;
+}
+
+message PKS_ZC_MONSTERCARD_EQUIP_ITEM 0x10003120
+{
+	required int32 CardId = 1;
+	required int32 CardSlot = 2;
+}
+
+message PKS_ZC_MONSTERCARD_STATE 0x10003130
+{	
+	required int32 CardId = 1;
+}
+
+
+message PKS_ZC_MONSTERCARD_UNEQUIP 0x10003140
+{
+	enum RESULT
+	{
+		Success = 0;
+		Failed = 1;
+	}
+	required RESULT Result = 1;
+}
+
+message PKS_ZC_MONSTERCARD_EQUIP 0x10003150
+{
+	enum RESULT
+	{
+		Success = 0;
+		Failed = 1;
+		SameOne = 2;
+	}
+	required RESULT Result = 1;
+}
+
+message PKS_ZC_MONSTERCARD_COMBIN 0x10003160
+{	
+	enum RESULT
+	{
+		Success = 0;
+		FailedGold = 1;
+		FailedMaterial = 2;
+	}
+	required RESULT Result = 1;
+}
+
+message PKS_ZC_MONSTERCARD_UPDATE 0x10003170
+{	
+	repeated PKS_ZC_MONSTERCARD_ITEM CardList = 1;
+	repeated PKS_ZC_MONSTERCARD_EQUIP_ITEM EquipList = 2;
+	repeated int32 StateList = 3;
+}
+
+
+// =================================================
+// ============================= ZIP
+// =================================================
+
+message PKS_ZC_ZIP_BUFFS 0x12300001
+{	
+	repeated PKS_ZC_BUFFS collection = 1;
+}
+
+message PKS_ZC_ZIP_CHARACTER_SKILL 0x12300002
+{	
+	repeated PKS_ZC_CHARACTER_SKILL collection = 1;
+}
+
+message PKS_ZC_ZIP_CHARACTER_ATTACK 0x12300003
+{	
+	repeated PKS_ZC_CHARACTER_ATTACK collection = 1;
+}
+
+// =================================================
+// ============================= Coin
+// =================================================
+
+message PKS_ZC_EXCHANGERESULTLIST 0x10004101
+{	
+	repeated PKS_ZC_EXCHANGERESULT values = 1;
+}
+
+message PKS_ZC_EXCHANGERESULT 0x10004102
+{	
+	required int32 currenciesType = 1;
+	required int32 diamondcount = 2;
+	required int32 value = 3;
+	required int32 times = 4;
+}
+
+// =================================================
+// ============================= Send
+// =================================================
+
+message PKS_ZC_SEND 0x10005101
+{	
+	required int32 commandID = 1;
+	repeated int32 argsINT = 2;
+	repeated float argsFloat = 3;
+	repeated string argsString = 4;
+}

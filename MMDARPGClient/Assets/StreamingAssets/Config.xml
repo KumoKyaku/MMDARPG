@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 被2012 () 使用XMLSpy v编辑的 (http://www.altova.com) by -->
+<Config PATH="path" FPS="60" UIPath="UI/" SpritePath="Pictures/BG/" AudioClipPath="Sound/" PreparePath="Prepare/" WritePath="null" Language="Chinese" ModelPath="Charator/" DataPath="DataXML/" AnimatiorControllerPath="Charator/Animator/"/>

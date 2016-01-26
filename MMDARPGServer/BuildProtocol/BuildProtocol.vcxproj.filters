@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Message">
+      <UniqueIdentifier>{aaa130f5-fa47-444b-a1f7-4e4750f2483d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Message\Protocol.code">
+      <Filter>Message</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

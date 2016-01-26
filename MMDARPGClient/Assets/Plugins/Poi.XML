@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Poi</name>
+    </assembly>
+    <members>
+        <member name="T:System.Extension">
+            <summary>
+            Poi库支持的扩展方法。
+            Poi support extension methods.
+            </summary>
+        </member>
+        <member name="M:System.Extension.Config``1(System.Collections.Generic.Dictionary{``0,System.String},System.Xml.Linq.XElement,System.Action{System.Collections.Generic.Dictionary{``0,System.String},System.Xml.Linq.XElement})">
+            <summary>
+            <para>为 枚举，string 的词典提供一个快速配置方法。</para>
+            <para>用途：快速生成一个词典用作配置</para>
+            </summary>
+            <typeparam name="TEnum">表示一个枚举类型。如果不是枚举，则什么也不会发生。</typeparam>
+            <param name="_dic">目标词典</param>
+            <param name="_cfg">配置的XML</param>
+            <param name="_callback">自定义处理XML的方法</param>
+        </member>
+        <member name="M:System.Extension.ToInt(System.String)">
+            <summary>
+            使用int.Parse转换一个字符串，这个方法没有处理int.Parse的异常。
+            Use the int.Parse to convert a string, this method does not handle int.Parse's exceptions.
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Extension.ToDouble(System.String)">
+            <summary>
+            使用double.Parse转换一个字符串，这个方法没有处理double.Parse的异常。
+            Use the double.Parse to convert a string, this method does not handle double.Parse's exceptions.
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Extension.ToDoubleX_XX(System.String)">
+            <summary>
+            使用double.Parse转换一个字符串，保留2位小数,这个方法没有处理double.Parse的异常。
+            Use the double.Parse to convert a string,reserve 2 decimal places,this method does not handle double.Parse's exceptions.
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Extension.ToBool(System.String)">
+            <summary>
+            如果对象obj == "true"|| obj == "True" || obj == "1"返回true，否则返回false。
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Extension.SubPerCount(System.String,System.Int32)">
+            <summary>
+            按长度分割字符串
+            </summary>
+            <param name="_s"></param>
+            <param name="PerCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Extension.First``1(``0[])">
+            <summary>
+            返回数组的第一个值，如果数组长度为0，返回default(T)。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="_array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Extension.Last``1(``0[])">
+            <summary>
+            返回数组的第末尾值，如果数组长度为0，返回default(T)。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="_array"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Poi.MakeInstanceID">
+            <summary>
+             实例ID，线程安全
+            </summary>
+        </member>
+        <member name="P:Poi.MakeInstanceID.ID">
+            <summary>
+            取得一个ID
+            </summary>
+        </member>
+        <member name="M:Poi.MakeInstanceID.Zero">
+            <summary>
+            归零
+            </summary>
+        </member>
+        <member name="T:Poi.TaskStep">
+            <summary>
+            任务进度指示，一个任务总是从Null开始的，this[string name]== TaskState.Null之后，一个任务的标记就会开始存在
+            直到TaskState.UseDone。
+            </summary>
+        </member>
+        <member name="P:Poi.TaskStep.Item(System.String)">
+            <summary>
+            通过一个字符串来表示一个任务
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Poi.TaskStep.Item(System.Int32)">
+            <summary>
+            通过一个数字表示一个任务
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Poi.TesTAttribute">
+            <summary>
+            正在测试的.它可能仅在某些情况下有用.
+            </summary>
+        </member>
+        <member name="T:Poi.Util">
+            <summary>
+            工具
+            </summary>
+        </member>
+        <member name="M:Poi.Util.AutoFullProperties``1(System.Xml.Linq.XElement,``0)">
+            <summary>
+            自动填充属性
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="_cfg">配置xml</param>
+            <param name="_instance">静态属性为null</param>
+        </member>
+        <member name="M:Poi.Util.SaveProperties``1(``0,System.String,System.Boolean)">
+            <summary>
+            把属性转成XML
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="_instance"></param>
+            <param name="name">XElement的名字</param>
+            <param name="addTypeNameAttribute"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Poi.Void">
+            <summary>
+            真空类型，Null
+            </summary>
+        </member>
+        <member name="M:Poi.Void.Equals(System.Object)">
+            <summary>
+            Void 和null返回true，Void和Void返回true,其他返回false。
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Poi.Void.GetHashCode">
+            <summary>
+            永远返回0x0。
+            </summary>
+            <returns>0x0</returns>
+        </member>
+        <member name="T:Poi.Writing">
+            <summary>
+            <para>多语言文本查询。</para>
+            <para>创建XML为每个text指定一个ID号并配置多种语言，方便翻译和扩展。</para>
+            <para>初始化Text需要遵从示例的格式</para>
+            <pare>使用CreatTemlate方法在指定路径下创建一个XML模版。文件名默认为：TranslatorText。</pare>
+            <para>Interpreter</para>
+            <para>XML specify an ID number for each text is created and configured in multiple languages to facilitate translation and expansion.</para>
+            <para>Initializes the Text needs to follow the example format</para>
+            <pare>Under the specified path using the CreatTemlate method to create an XML template. File name will default to: TranslatorText.</pare>
+            </summary>
+        </member>
+        <member name="P:Poi.Writing.CurrentLanguage">
+            <summary>
+            当前使用的语言
+            </summary>
+        </member>
+        <member name="M:Poi.Writing.Init(System.Xml.Linq.XElement,Poi.Language)">
+            <summary>
+            初始化方法
+            </summary>
+            <param name="textXML">指定xml</param>
+            <param name="language">设定从xml中加载的语言</param>
+        </member>
+        <member name="M:Poi.Writing.CreatTemlate(System.String,System.String)">
+            <summary>
+            创建一个xml模版，初始化Text需要遵从这个示例的格式
+            </summary>
+            <param name="xmlPath">指定一个路径</param>
+            <param name="fileName">指定文件名字，需要.xml后缀</param>
+        </member>
+    </members>
+</doc>

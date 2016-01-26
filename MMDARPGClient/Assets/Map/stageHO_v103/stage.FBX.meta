@@ -1,0 +1,161 @@
+fileFormatVersion: 2
+guid: 02e4611471dc0ea4799bb1f621bd9fd4
+timeCreated: 1451902124
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: 0.!joint_Center
+    100002: 1.!joint_senta^genten
+    100004: 10.!joint_hidari1SPoya
+    100006: 11.!joint_hidari2SPoya
+    100008: 12.!joint_migi2SPoya
+    100010: 13.!joint_migi1SPoya
+    100012: 14.!joint_hidari1SPsenta^
+    100014: 15.!joint_hidari2SPsenta^
+    100016: 16.!joint_migi2SPsenta^
+    100018: 17.!joint_migi1SPsenta^
+    100020: 18.!joint_hidari1SPjuushin
+    100022: 19.!joint_hidari2SPjuushin
+    100024: 2.!joint_hontaioya
+    100026: 20.!joint_migi2SPjuushin
+    100028: 21.!joint_migi1SPjuushin
+    100030: 22.joint_hidari1SPkabu
+    100032: 23.joint_hidari2SPkabu
+    100034: 24.joint_migi2SPkabu
+    100036: 25.joint_migi1SPkabu
+    100038: 26.joint_hidari1SPdaiza
+    100040: 27.joint_hidari2SPdaiza
+    100042: 28.joint_migi2SPdaiza
+    100044: 29.joint_migi1SPdaiza
+    100046: 3.!joint_hontaioyagenten
+    100048: 30.joint_hidari1SPwa
+    100050: 31.joint_hidari2SPwa
+    100052: 32.joint_migi2SPwa
+    100054: 33.joint_migi1SPwa
+    100056: 34.joint_hidari1SPshouwa
+    100058: 35.joint_hidari2SPshouwa
+    100060: 36.joint_migi2SPshouwa
+    100062: 37.joint_migi1SPshouwa
+    100064: 38.!Root
+    100066: 4.joint_daiza
+    100068: 5.joint_ringu
+    100070: 6.joint_kabu
+    100072: 7.joint_shouringujou
+    100074: 8.joint_shouringuka
+    100076: 9.!joint_supi^ka^chon
+    100078: map
+    100080: //RootNode
+    100082: U_Char
+    400000: 0.!joint_Center
+    400002: 1.!joint_senta^genten
+    400004: 10.!joint_hidari1SPoya
+    400006: 11.!joint_hidari2SPoya
+    400008: 12.!joint_migi2SPoya
+    400010: 13.!joint_migi1SPoya
+    400012: 14.!joint_hidari1SPsenta^
+    400014: 15.!joint_hidari2SPsenta^
+    400016: 16.!joint_migi2SPsenta^
+    400018: 17.!joint_migi1SPsenta^
+    400020: 18.!joint_hidari1SPjuushin
+    400022: 19.!joint_hidari2SPjuushin
+    400024: 2.!joint_hontaioya
+    400026: 20.!joint_migi2SPjuushin
+    400028: 21.!joint_migi1SPjuushin
+    400030: 22.joint_hidari1SPkabu
+    400032: 23.joint_hidari2SPkabu
+    400034: 24.joint_migi2SPkabu
+    400036: 25.joint_migi1SPkabu
+    400038: 26.joint_hidari1SPdaiza
+    400040: 27.joint_hidari2SPdaiza
+    400042: 28.joint_migi2SPdaiza
+    400044: 29.joint_migi1SPdaiza
+    400046: 3.!joint_hontaioyagenten
+    400048: 30.joint_hidari1SPwa
+    400050: 31.joint_hidari2SPwa
+    400052: 32.joint_migi2SPwa
+    400054: 33.joint_migi1SPwa
+    400056: 34.joint_hidari1SPshouwa
+    400058: 35.joint_hidari2SPshouwa
+    400060: 36.joint_migi2SPshouwa
+    400062: 37.joint_migi1SPshouwa
+    400064: 38.!Root
+    400066: 4.joint_daiza
+    400068: 5.joint_ringu
+    400070: 6.joint_kabu
+    400072: 7.joint_shouringujou
+    400074: 8.joint_shouringuka
+    400076: 9.!joint_supi^ka^chon
+    400078: map
+    400080: //RootNode
+    400082: U_Char
+    2300000: map
+    2300002: U_Char
+    3300000: map
+    3300002: U_Char
+    4300000: U_Char
+    4300002: map
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
