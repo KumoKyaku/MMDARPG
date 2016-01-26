@@ -137,3 +137,4 @@ Bin/iPoi.xml
 Bin/protobuf-net.dll
 Bin/protobuf-net.pdb
 Bin/protobuf-net.xml
+.gitignore.rej
